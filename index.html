@@ -1,187 +1,1214 @@
 <!DOCTYPE html>
-<html lang="ko"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI 즐겨찾기 - AI 도구 포털</title>
-<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;600;700;900&amp;family=Noto+Sans+KR:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<style type="text/tailwindcss">
-      :root {
-        --primary-color: #0c7ff2;
-        --secondary-color: #f0f8ff;
-        --text-primary: #111827;
-        --text-secondary: #6b7280;
-        --background-color: #ffffff;
-      }
-      body {
-        font-family: 'Inter', 'Noto Sans KR', sans-serif;
-      }
-      .active-nav-link {
-        color: var(--primary-color);
-        position: relative;
-      }
-      .active-nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background-color: var(--primary-color);
-        border-radius: 2px;
-      }
-    </style>
-</head>
-<body class="bg-[var(--background-color)] text-[var(--text-primary)]">
-<div class="flex min-h-screen flex-col">
-<header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
-<div class="container mx-auto flex items-center justify-between px-6 py-4">
-<div class="flex items-center gap-4">
-<svg class="h-8 w-8 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
-<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-<h1 class="text-xl font-bold tracking-tight">AI 즐겨찾기</h1>
-</div>
-<nav class="hidden items-center gap-10 lg:flex">
-<a class="text-base font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]" href="#">홈</a>
-<a class="text-base font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]" href="#">카테고리</a>
-<a class="text-base font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]" href="#">새로운 도구</a>
-<a class="text-base font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]" href="#">인기 있는 도구</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="rounded-full p-2 text-[var(--text-secondary)] transition-colors hover:bg-gray-100 hover:text-[var(--text-primary)]">
-<svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
-</button>
-<button class="rounded-full p-2 text-[var(--text-secondary)] transition-colors hover:bg-gray-100 hover:text-[var(--text-primary)]">
-<svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path></svg>
-</button>
-</div>
-</div>
-</header>
-<main class="flex-grow">
-<section class="py-20 text-center sm:py-32">
-<div class="container mx-auto px-6">
-<h2 class="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl">필요한 모든 AI 도구를<br/>한 곳에서 찾으세요</h2>
-<p class="mx-auto mt-6 max-w-2xl text-lg text-[var(--text-secondary)]">최신 AI 기술을 활용하여 생산성을 높이고 창의력을 발휘해보세요.</p>
-</div>
-</section>
-<div class="container mx-auto max-w-5xl px-6">
-<div class="border-b border-gray-200">
-<nav aria-label="Tabs" class="-mb-px flex space-x-8">
-<a class="active-nav-link flex items-center gap-2 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-semibold" href="#">
-<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94l-51.65,19-19,51.61a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88l51.65-19,19-51.61a15.92,15.92,0,0,1,29.88,0l19,51.65,51.61,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"></path></svg>
-                추천
-              </a>
-<a class="flex items-center gap-2 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-[var(--text-secondary)] hover:border-gray-300 hover:text-[var(--text-primary)]" href="#">
-<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M200,48H136V16a8,8,0,0,0-16,0V48H56A32,32,0,0,0,24,80V192a32,32,0,0,0,32,32H200a32,32,0,0,0,32-32V80A32,32,0,0,0,200,48Zm16,144a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V80A16,16,0,0,1,56,64H200a16,16,0,0,1,16,16Zm-52-56H92a28,28,0,0,0,0,56h72a28,28,0,0,0,0-56Zm-28,16v24H120V152ZM80,164a12,12,0,0,1,12-12h12v24H92A12,12,0,0,1,80,164Zm84,12H152V152h12a12,12,0,0,1,0,24ZM72,108a12,12,0,1,1,12,12A12,12,0,0,1,72,108Zm88,0a12,12,0,1,1,12,12A12,12,0,0,1,160,108Z"></path></svg>
-                텍스트
-              </a>
-<a class="flex items-center gap-2 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-[var(--text-secondary)] hover:border-gray-300 hover:text-[var(--text-primary)]" href="#">
-<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"></path></svg>
-                작문
-              </a>
-<a class="flex items-center gap-2 whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-base font-medium text-[var(--text-secondary)] hover:border-gray-300 hover:text-[var(--text-primary)]" href="#">
-<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"></path></svg>
-                코드
-              </a>
-</nav>
-</div>
-</div>
-<section class="py-16 sm:py-20">
-<div class="container mx-auto max-w-7xl px-6">
-<h2 class="mb-10 text-3xl font-bold tracking-tight">인기 있는 도구</h2>
-<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5ZZXh5goj8u7Or72kVhadBiOz-Mz-7YK6KFINX5tXKahp1Suabng3m5nyBwFrZK27N1x3Z-Iwl3O8_MDJq7oK8XzifgvXUpiM4wBy5lwFe7-qpCRrY8fA7H6D9CsWt2fTfmw9ZHfosr5_EEJh1iPS5ckfHpZwhJ-xewK07hiYYAksYS2b6wQDVHYC67mNXlmM93A9C8EMtgnSKgf6fX4C5WwMmBoDVNTdrItTnprM7ZrbRPeArAj3iHXtpnFClcZkZp4ztVMJAbY");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">GPT</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAw3QWadMHN4e8EfCDjVAbJH_LMW_sNLqW0lrUJPESAE74HnE9J8zAXNnmQSVbJRVe7ig6UDUF3d8jJrvs6LbLz5AlL6YHO5gUImuL6INxfoCrvBsXsZhRI3NVtyWBMUrTB0qJgtZmBKjDy9snRJ5fQ-qb6C_SsTQG2IYy3nSZioXBEFU7ULwLxLnYdIvL-v2RvjDh8BviudX92BqJZzWt4W4PR-N_LRFhiPxZ9bI5Ar8KChXKQYcUXvenayFxBCtijMMfy5r1ROCY");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Gemini</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCn8gM35PuuevoMiYNiNe9FraS7oY1eFnPB-LF2c7Pqzn6mWOpbhdSumgCBbytaLAGa8YAZp48YW-mgdYOVkENRhiWwuMskVgoeyqYTBLULjTW2zR0MKXjOOSYmMLpMzHEnwCt3_3WxuAUOaY7NtLJkM129_ji795Ukg9acN7PizTCUrbzPRoH8oFoO-1JJFNINfTaXzK9AqXIsJpqMOQpJW0yTa_xsdndl9x7iABp3-lw2l_xp8p5gamCKVi3P1eE_S5keHIu1ewI");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Suno</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCvmmY0XzcUhrlm_IYYFBTqjuN_15GmhwfwNcA0t1YhtvsJbpXS-9cQdkmkIiADPYFB4QbiXyIvcv7ZWoDdJatmWnUYIPz_sw_Xg6cvycgqAb5WqJDk-h__eYigABF7b39FZ96BiMLmf32-rq-hmhTA1rh9e9zXeXLRgIUxZ6DTZM1hzVoUaLgQusH5j9VdhGVMdHEUUJiKA2_tm7mSNxYH11JaWh4DSIe6AE7Ia8evFXeNO9nK8wNXMp4ypt47jgkBo15FoUFwmdw");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Midjourney</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDTZZG7VIQ_ovKR0eq1nvgkB2YiOj959fwL3wOCx_vt9MCMYe_0KdQ6pnFpOwbOR1bojiz7EsEkoV_Ucd4ro1QT3NpuYOjikUf_B13dxL02sq36pqZP2_odgyz5FisDbKgaj7WJxnl8taFzGxVo8mmP_ST6gJU0iz3nO2KbsC-whV7oucVFtr_fEu-8jZClCo0QNcExkYbcnY8qp1AKwnANhZRTlpQUnCyZqYXJNPghRmf3X9tt9L9vv3TymPfI35malp2JZ-56two");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Claude</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYjHTk6XKZy2-gPf8SCRnzVhqce-ST0NbigAIOH6zfYy5GCphcRQ1ZqMubee2sRsKAoTLTYVQmbVdIKhlpH-XnM3yPHJntpRVkR34YhQaC291ZYXQT9CkVFwWDemUf2HM9iMvwgR0cNUaPHUJeUfCdpAfl_pq7nTBTxARDhtdL_78qn6cjN4SWDoP-urd1Si6Swsg5KxqZPvSSEFJeFXPMmzUSe99AiZOluN44czur3lJKk_CSFcy8-nZMM5V2leE4itp7fO6_560");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">DALL-E 2</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrNtHfV2hsQ1Gjzej0a0l9_qAxaTkLkqwrzlq0-95IMr3UjTXJdJnM84UYZwo-Y0xFlypPbzBfOHbtQDhwBucyy_8jAcbbkrHafQWeDmsDl7gCL5rs2UksCE3NuWSbfTdY2fcsAKgM5ZscbcovfQwuG5xTrwciVIAZbq5tK7nQDz_26IMVaoPzYW00InASlKNSRDkySqxit65gvdTbpX6aIEMNUr14rV7FVV3fnhJRQFWl0Md33HdvAgTX2cSY9GwRsu_YStH9gi8");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Stable Diffusion</h3>
-</div>
-</div>
-</div>
-<div class="group transform transition-transform duration-300 hover:-translate-y-2">
-<div class="overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 group-hover:shadow-xl">
-<div class="aspect-video w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGMFZ3-_eiwsoFnblR6OC0bCWJyRO7FVFOCtnfsA6fyYg-NxSmpcagRDtCcQC37pTqa5DIvDsc8MhYyQ4gcCVrO3VD84MGUIPEYMR3NhnUHrAtI2DA6IFx8RYUM48-PZGUnC2On7dPQU3TaPEs8JVXGz2jwrNin8z-qrkrHStKePE7GrisIkdXI9HegIRFDAUcwYViu-y1MkRWSyZ6fZW5parDykqnFDfy692flXY813jOiIXACI8pb4JpRuH0_hDn8QbabzPCiP4");'></div>
-<div class="bg-white p-5">
-<h3 class="text-lg font-semibold">Runway</h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<footer class="bg-gray-50">
-<div class="container mx-auto px-6 py-12">
-<div class="flex flex-col items-center justify-between md:flex-row">
-<div class="flex items-center gap-2">
-<svg class="h-6 w-6 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
-<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-<p class="text-base font-semibold">AI 즐겨찾기</p>
-</div>
-<div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-4 md:mt-0">
-<a class="text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="#">이용 약관</a>
-<a class="text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="#">개인 정보 정책</a>
-<a class="text-base text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="#">문의하기</a>
-</div>
-</div>
-<div class="mt-8 border-t border-gray-200 pt-8 text-center text-base text-[var(--text-secondary)]">
-<p>© 2024 AI 즐겨찾기. All rights reserved.</p>
-</div>
-</div>
-</footer>
-</div>
+<!--
+  sortInc. — LLM & Applied AI Engineering
+  Single-file homepage. No build step, no dependencies to install.
+  Deployed at https://sort-tech.github.io/ai-tech-portal/
 
-</body></html>
+  EDIT POINTS (search for these strings):
+    "Jwp"                  → founder / display name
+    "jiwon83park@gmail.com" → contact email
+    "github.com/sort-tech"  → GitHub org
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>sortInc. — LLM &amp; Applied AI Engineering</title>
+<meta name="description" content="sortInc. builds production AI systems: LLM gateways with governance, RAG over knowledge graphs, multimodal vision pipelines, digital twins and offline-first geospatial stacks. Open source on GitHub."/>
+<meta name="author" content="sortInc."/>
+<meta property="og:title" content="sortInc. — LLM &amp; Applied AI Engineering"/>
+<meta property="og:description" content="Production LLM systems, knowledge graphs, RAG pipelines and AI agents — designed, built and shipped end to end. Open source on GitHub."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://sort-tech.github.io/ai-tech-portal/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="canonical" href="https://sort-tech.github.io/ai-tech-portal/"/>
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a'/%3E%3Cpath d='M9 21c2.2 1.5 5 1.6 6.4.2 1.6-1.6-.3-3.4-2.6-4.3-2.3-.9-3.9-2.4-2.6-4.3C11.6 11 14.4 11 16.6 12' stroke='%2322d3ee' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='20' r='2.6' fill='%2322d3ee'/%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        },
+        colors: {
+          ink: { 950: '#070b14', 900: '#0b1120', 850: '#0f172a', 800: '#141d33', 700: '#1e293b' },
+          accent: '#22d3ee',
+          accent2: '#818cf8',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root { color-scheme: dark; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body { background-color: #070b14; }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .glow {
+    background: radial-gradient(60% 55% at 50% 0%, rgba(34, 211, 238, 0.16), transparent 70%),
+                radial-gradient(45% 45% at 85% 20%, rgba(129, 140, 248, 0.14), transparent 70%);
+  }
+  .card-hairline {
+    background-image: linear-gradient(180deg, rgba(148, 163, 184, 0.16), rgba(148, 163, 184, 0.02));
+  }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .marquee-track { animation: marquee 38s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .marquee-track { animation: none; }
+  }
+  ::selection { background: rgba(34, 211, 238, 0.28); }
+</style>
+</head>
+<body class="font-sans text-slate-300 antialiased">
+
+<a href="#capabilities" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-ink-950">Skip to content</a>
+
+<!-- ════════════════════════════ HEADER ════════════════════════════ -->
+<header class="sticky top-0 z-50 border-b border-white/5 bg-ink-950/80 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent/25 to-accent2/25 ring-1 ring-inset ring-white/10">
+        <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 16c2.4 1.7 5.6 1.8 7.2.2 1.8-1.8-.4-3.8-3-4.8-2.6-1-4.4-2.7-2.9-4.8C6.8 5 9.9 5 12.3 6.2"/>
+          <circle cx="18.2" cy="15.6" r="2.6" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <span class="flex flex-col leading-none">
+        <span class="text-[15px] font-bold tracking-tight text-white">sortInc.</span>
+        <span class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">ai innovators</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex">
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#capabilities">Capabilities</a>
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#opensource">Open source</a>
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#work">Work</a>
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#stack">Stack</a>
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#process">Process</a>
+      <a class="text-sm font-medium text-slate-400 transition-colors hover:text-white" href="#about">About</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="https://github.com/sort-tech" target="_blank" rel="noopener noreferrer"
+         class="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/5 hover:text-white" aria-label="GitHub profile">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.4-3.88-1.4-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+        </svg>
+      </a>
+      <a href="#contact" class="hidden rounded-lg bg-white/5 px-4 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/10 sm:block">
+        Get in touch
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ════════════════════════════ HERO ════════════════════════════ -->
+<section class="relative overflow-hidden border-b border-white/5">
+  <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
+  <div class="absolute inset-0 glow" aria-hidden="true"></div>
+  <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-950 to-transparent" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28 lg:py-32">
+    <div class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3 py-1">
+      <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">Available for new engagements</span>
+    </div>
+
+    <h1 class="mt-6 max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+      AI systems that survive
+      <span class="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">contact with production.</span>
+    </h1>
+
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-400">
+      <span class="font-semibold text-slate-200">sortInc.</span> is an engineering studio in Seoul building
+      knowledge graphs, RAG pipelines and AI agents — plus the gateways, APIs and operator interfaces that
+      make them usable. Not demos: guardrail chains with audit trails, detectors with false-positive
+      filters, test suites in the hundreds.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-3">
+      <a href="#opensource" class="group inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-ink-950 transition-transform hover:-translate-y-0.5">
+        Read our code
+        <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.7 4.3a1 1 0 0 0-1.4 1.4L12.6 9H4a1 1 0 1 0 0 2h8.6l-3.3 3.3a1 1 0 1 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4l-5-5Z"/></svg>
+      </a>
+      <a href="#contact" class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-200 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/5">
+        Start a project
+      </a>
+    </div>
+
+    <dl class="mt-16 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-white/5 pt-10 sm:grid-cols-4">
+      <div>
+        <dt class="font-mono text-3xl font-bold text-white sm:text-4xl">15</dt>
+        <dd class="mt-1.5 text-sm text-slate-500">Public repositories you can read today on GitHub</dd>
+      </div>
+      <div>
+        <dt class="font-mono text-3xl font-bold text-white sm:text-4xl">30+</dt>
+        <dd class="mt-1.5 text-sm text-slate-500">Systems shipped across AI, web and industrial domains</dd>
+      </div>
+      <div>
+        <dt class="font-mono text-3xl font-bold text-white sm:text-4xl">E2E</dt>
+        <dd class="mt-1.5 text-sm text-slate-500">Model tuning, backend, frontend, Docker, deployment</dd>
+      </div>
+      <div>
+        <dt class="font-mono text-3xl font-bold text-white sm:text-4xl">Air-gap</dt>
+        <dd class="mt-1.5 text-sm text-slate-500">Local models, vendored assets, zero runtime calls out</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ════════════════════════════ TECH MARQUEE ════════════════════════════ -->
+<section class="border-b border-white/5 bg-ink-900/40 py-6" aria-label="Technologies used">
+  <div class="marquee-mask overflow-hidden">
+    <div class="marquee-track flex w-max items-center gap-10 whitespace-nowrap">
+      <!-- duplicated once for a seamless loop -->
+      <span class="font-mono text-sm text-slate-600">LiteLLM</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">Neo4j + n10s</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">pgvector</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">FastAPI</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">Ollama</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">vLLM</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">YOLO</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">qwen3-vl</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">LoRA / QLoRA</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">RAGFlow</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">Flowise</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">MCP</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">React</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">MapLibre</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">Omniverse USD</span><span class="text-slate-800">◆</span>
+      <span class="font-mono text-sm text-slate-600">Docker</span><span class="text-slate-800">◆</span>
+
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">LiteLLM</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">Neo4j + n10s</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">pgvector</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">FastAPI</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">Ollama</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">vLLM</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">YOLO</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">qwen3-vl</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">LoRA / QLoRA</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">RAGFlow</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">Flowise</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">MCP</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">React</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">MapLibre</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">Omniverse USD</span><span class="text-slate-800" aria-hidden="true">◆</span>
+      <span class="font-mono text-sm text-slate-600" aria-hidden="true">Docker</span><span class="text-slate-800" aria-hidden="true">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ CAPABILITIES ════════════════════════════ -->
+<section id="capabilities" class="border-b border-white/5 py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Capabilities</p>
+    <h2 class="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      Six things we build, and the hard parts we've already hit
+    </h2>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-inset ring-accent/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 5 3.4 8.7 8 9.5 4.6-.8 8-4.5 8-9.5v-5L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">LLM gateway &amp; governance</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            LiteLLM proxies with custom guardrail chains: PII masking, term blocking, high-impact-decision
+            detection, emergency stop, and hash-chained JSONL audit evidence — mapped to Korea's AI Framework Act.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">LiteLLM</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Guardrails</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Compliance</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent2/10 text-accent2 ring-1 ring-inset ring-accent2/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M10.4 7.1 6.6 15.6M13.6 7.1l3.8 8.5M7.5 18h9"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">Knowledge graphs &amp; RAG</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            Retrieval that cites its sources. pgvector and RAGFlow pipelines alongside Neo4j + n10s
+            ontology stores, so semantic memory is queryable as RDF instead of an opaque embedding blob.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">pgvector</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Neo4j / n10s</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">RAGFlow</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-inset ring-accent/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="12" cy="12" r="3.2"/><path d="M7 5V3.5M17 5V3.5"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">Multimodal vision pipelines</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            Two-stage inference where a fast detector proposes and a VLM verifies — YOLO recall first,
+            <span class="font-mono text-[13px] text-slate-300">qwen3-vl</span> precision second, so shadows,
+            puddles and manhole covers stop being potholes.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">YOLO</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">VLM</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Ollama</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent2/10 text-accent2 ring-1 ring-inset ring-accent2/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 12h14M5 18h14"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">Fine-tuning &amp; local inference</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            End-to-end LoRA and QLoRA pipelines for local models: synthetic data generation, training, eval,
+            adapter merge, GGUF conversion and re-registration into Ollama — text and vision, on your own hardware.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">LoRA / QLoRA</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">GGUF</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">vLLM</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-inset ring-accent/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 20.5 7 12 11.2 3.5 7 12 2.8Z"/><path d="M3.5 12 12 16.2 20.5 12M3.5 17 12 21.2 20.5 17"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">Digital twins &amp; geospatial</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            Real-time Omniverse/USD plant twins driven by a single versioned WebSocket contract, and
+            vector-tile map stacks — tiles, Korean glyphs, sprites, viewer — that run with zero runtime
+            network access.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Omniverse / USD</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">MapLibre</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">MBTiles</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal group rounded-2xl p-px card-hairline">
+        <div class="h-full rounded-2xl bg-ink-900 p-6 transition-colors group-hover:bg-ink-850">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent2/10 text-accent2 ring-1 ring-inset ring-accent2/20">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-4 4 4 4M15 8l4 4-4 4"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-white">Product &amp; platform engineering</h3>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-400">
+            The unglamorous half that decides whether AI ships: FastAPI services, React + Vite frontends,
+            browser extensions, Postgres migrations, Docker Compose, nginx, and forecasting on real
+            operational data.
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">FastAPI</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">React</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Docker</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ OPEN SOURCE ════════════════════════════ -->
+<section id="opensource" class="relative border-b border-white/5 py-20 sm:py-24">
+  <div class="absolute inset-0 bg-ink-900/40" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Open source</p>
+        <h2 class="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          Don't take our word for it — read the code
+        </h2>
+      </div>
+      <a href="https://github.com/sort-tech?tab=repositories" target="_blank" rel="noopener noreferrer"
+         class="group inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/5">
+        All 15 repositories
+        <svg class="h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.7 4.3a1 1 0 0 0-1.4 1.4L12.6 9H4a1 1 0 1 0 0 2h8.6l-3.3 3.3a1 1 0 1 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4l-5-5Z"/></svg>
+      </a>
+    </div>
+
+    <p class="mt-5 max-w-3xl text-base leading-relaxed text-slate-400">
+      Everything below is public on
+      <a class="font-medium text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent" href="https://github.com/sort-tech" target="_blank" rel="noopener noreferrer">github.com/sort-tech</a>.
+      Clone it, run it, audit it. We publish the tooling we use ourselves, because the fastest way to
+      judge an engineering partner is to read their commits rather than their case studies.
+    </p>
+
+    <!-- Featured repositories -->
+    <h3 class="mt-12 font-mono text-xs uppercase tracking-[0.16em] text-slate-500">Projects we author &amp; maintain</h3>
+    <div class="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+      <!-- image-to-ppt -->
+      <a href="https://github.com/sort-tech/image-to-ppt" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">image-to-ppt</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            Turns a screenshot, scan or whiteboard photo into a real <span class="font-mono text-[13px] text-slate-300">.pptx</span>
+            whose tables and text boxes are native, editable shapes — never a flattened image.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-[#3572A5]"></span>Python</span>
+            <span class="flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8.75.75V2h.985c.304 0 .603.08.867.231l1.29.736c.038.022.08.033.124.033h2.234a.75.75 0 0 1 0 1.5h-.427l2.111 4.692a.75.75 0 0 1-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.006.005-.01.01-.045.04c-.21.176-.441.327-.686.45C14.556 10.78 13.88 11 13 11a4.498 4.498 0 0 1-2.023-.454 3.544 3.544 0 0 1-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75 0 0 1-.154-.838L12.178 4.5h-.162c-.305 0-.604-.079-.868-.231l-1.29-.736a.245.245 0 0 0-.124-.033H8.75V13h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V3.5h-.984a.245.245 0 0 0-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112 4.692a.75.75 0 0 1-.154.838l-.53-.53.529.531-.001.002-.002.002-.006.006-.016.015-.045.04c-.21.176-.441.327-.686.45C4.556 10.78 3.88 11 3 11a4.498 4.498 0 0 1-2.023-.454 3.544 3.544 0 0 1-.686-.45l-.045-.04-.016-.015-.006-.006-.004-.004v-.001a.75.75 0 0 1-.154-.838L2.178 4.5H1.75a.75.75 0 0 1 0-1.5h2.234a.249.249 0 0 0 .125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75 0 0 1 1.5 0Zm2.945 8.477c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L13 6.327Zm-10 0c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L3 6.327Z"/></svg>
+              Apache-2.0
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- llm-finetuning-tutorial -->
+      <a href="https://github.com/sort-tech/llm-finetuning-tutorial" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">llm-finetuning-tutorial</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            Step-by-step tutorial and working code for fine-tuning LLMs with LoRA, QLoRA and
+            Unsloth / Hugging Face <span class="font-mono text-[13px] text-slate-300">SFTTrainer</span>.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-[#3572A5]"></span>Python</span>
+            <span class="flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.193L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>
+              Starred
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- llm-chat-widget -->
+      <a href="https://github.com/sort-tech/llm-chat-widget" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">llm-chat-widget</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            A lightweight, embeddable LLM chat widget — add an AI assistant to any site with a single
+            script tag. Side-panel mode, page summarisation, LiteLLM backend.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-[#f1e05a]"></span>JavaScript</span>
+            <span class="font-mono text-[11px]">litellm</span>
+            <span class="font-mono text-[11px]">extension</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- neo4j-n10s-pipeline -->
+      <a href="https://github.com/sort-tech/neo4j-n10s-pipeline" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">neo4j-n10s-pipeline</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            Ontology ingestion for Neo4j with the n10s semantic plugin and APOC — RDF in, a queryable
+            knowledge graph out. The backbone of our graph-based agent memory.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-[#3572A5]"></span>Python</span>
+            <span class="flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8.75.75V2h.985c.304 0 .603.08.867.231l1.29.736c.038.022.08.033.124.033h2.234a.75.75 0 0 1 0 1.5h-.427l2.111 4.692a.75.75 0 0 1-.154.838C14.556 10.78 13.88 11 13 11c-.88 0-1.556-.22-2.023-.454a.75.75 0 0 1-.154-.838L12.178 4.5h-.162c-.305 0-.604-.079-.868-.231l-1.29-.736a.245.245 0 0 0-.124-.033H8.75V13h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V3.5h-.984a.245.245 0 0 0-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112 4.692a.75.75 0 0 1-.154.838C4.556 10.78 3.88 11 3 11c-.88 0-1.556-.22-2.023-.454a.75.75 0 0 1-.154-.838L2.178 4.5H1.75a.75.75 0 0 1 0-1.5h2.234a.249.249 0 0 0 .125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75 0 0 1 1.5 0Z"/></svg>
+              MIT
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- bframe -->
+      <a href="https://github.com/sort-tech/bframe" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">bframe</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            An enterprise blockchain framework — distributed-ledger groundwork for auditable,
+            tamper-evident records, the same instinct behind our hash-chained AI audit trails.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8.75.75V2h.985c.304 0 .603.08.867.231l1.29.736c.038.022.08.033.124.033h2.234a.75.75 0 0 1 0 1.5h-.427l2.111 4.692a.75.75 0 0 1-.154.838C14.556 10.78 13.88 11 13 11c-.88 0-1.556-.22-2.023-.454a.75.75 0 0 1-.154-.838L12.178 4.5h-.162c-.305 0-.604-.079-.868-.231l-1.29-.736a.245.245 0 0 0-.124-.033H8.75V13h2.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5h2.5V3.5h-.984a.245.245 0 0 0-.124.033l-1.289.737c-.265.15-.564.23-.869.23h-.162l2.112 4.692a.75.75 0 0 1-.154.838C4.556 10.78 3.88 11 3 11c-.88 0-1.556-.22-2.023-.454a.75.75 0 0 1-.154-.838L2.178 4.5H1.75a.75.75 0 0 1 0-1.5h2.234a.249.249 0 0 0 .125-.033l1.288-.737c.265-.15.564-.23.869-.23h.984V.75a.75.75 0 0 1 1.5 0Z"/></svg>
+              GPL-3.0
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- ai-tech-portal -->
+      <a href="https://github.com/sort-tech/ai-tech-portal" target="_blank" rel="noopener noreferrer"
+         class="reveal group flex flex-col rounded-2xl p-px card-hairline transition-transform hover:-translate-y-1">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-950 p-6">
+          <div class="flex items-center gap-2">
+            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            <span class="font-mono text-sm font-semibold text-white group-hover:text-accent">ai-tech-portal</span>
+          </div>
+          <p class="mt-3 flex-grow text-sm leading-relaxed text-slate-400">
+            This site. One HTML file, no build step, no framework — served straight from GitHub Pages.
+            The source of the page you're reading is one click away.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-[#e34c26]"></span>HTML</span>
+            <span class="font-mono text-[11px]">GitHub Pages</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Adapted / operated stack -->
+    <h3 class="mt-14 font-mono text-xs uppercase tracking-[0.16em] text-slate-500">Open-source stack we run, adapt and deploy</h3>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-500">
+      These are public forks we maintain for client deployments — customised builds, embeds and
+      integrations of upstream projects. Listed for transparency about the platforms we operate day to day,
+      with full credit to their original authors.
+    </p>
+    <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+
+      <a href="https://github.com/sort-tech/SortFlowise" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">SortFlowise</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">Visual AI-agent builder (Flowise) — our deployment build. TypeScript.</span>
+        </span>
+      </a>
+
+      <a href="https://github.com/sort-tech/sortRagflow" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">sortRagflow</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">RAGFlow — retrieval-augmented generation engine with agent capabilities. Go.</span>
+        </span>
+      </a>
+
+      <a href="https://github.com/sort-tech/sort-chatbot-ollama" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">sort-chatbot-ollama</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">Chat UI for fully local Ollama models. TypeScript.</span>
+        </span>
+      </a>
+
+      <a href="https://github.com/sort-tech/SortFlowiseChatEmbed" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">SortFlowiseChatEmbed</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">Rebranded embeddable chat widget for client sites. TypeScript.</span>
+        </span>
+      </a>
+
+      <a href="https://github.com/sort-tech/open-notebook" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">open-notebook</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">Open-source NotebookLM alternative for document research. TypeScript.</span>
+        </span>
+      </a>
+
+      <a href="https://github.com/sort-tech/RoadDamageDetector" target="_blank" rel="noopener noreferrer"
+         class="group flex items-start gap-3 rounded-xl bg-ink-950 p-4 ring-1 ring-inset ring-white/5 transition-colors hover:ring-white/15">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-slate-600" viewBox="0 0 16 16" fill="currentColor"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>
+        <span>
+          <span class="font-mono text-sm font-medium text-slate-200 group-hover:text-accent">RoadDamageDetector</span>
+          <span class="mt-1 block text-xs leading-relaxed text-slate-500">Road-damage detection research baseline we build on. Jupyter.</span>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ WORK ════════════════════════════ -->
+<section id="work" class="border-b border-white/5 py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Selected work</p>
+        <h2 class="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          Systems, not screenshots
+        </h2>
+      </div>
+      <p class="max-w-sm text-sm leading-relaxed text-slate-500">
+        Client and internal systems beyond the public repos. Descriptions stay at architecture level
+        where the work is under NDA.
+      </p>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter projects by domain">
+      <button type="button" data-filter="all" class="filter-btn rounded-lg bg-accent px-3.5 py-2 text-sm font-semibold text-ink-950 transition-colors">All</button>
+      <button type="button" data-filter="llm" class="filter-btn rounded-lg bg-white/5 px-3.5 py-2 text-sm font-medium text-slate-400 ring-1 ring-inset ring-white/10 transition-colors hover:text-white">LLM &amp; agents</button>
+      <button type="button" data-filter="vision" class="filter-btn rounded-lg bg-white/5 px-3.5 py-2 text-sm font-medium text-slate-400 ring-1 ring-inset ring-white/10 transition-colors hover:text-white">Vision &amp; ML</button>
+      <button type="button" data-filter="data" class="filter-btn rounded-lg bg-white/5 px-3.5 py-2 text-sm font-medium text-slate-400 ring-1 ring-inset ring-white/10 transition-colors hover:text-white">Data &amp; graphs</button>
+      <button type="button" data-filter="industrial" class="filter-btn rounded-lg bg-white/5 px-3.5 py-2 text-sm font-medium text-slate-400 ring-1 ring-inset ring-white/10 transition-colors hover:text-white">Industrial</button>
+    </div>
+
+    <div id="project-grid" class="mt-8 grid gap-5 md:grid-cols-2">
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">LLM Gateway Guardrails</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Governance</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            A six-stage guardrail chain in front of a LiteLLM proxy. Requests pass through evidence logging,
+            governance gating, PII masking, high-impact detection and transparency injection before they
+            reach a model — and back out again in reverse on the response.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Every success and failure lands in a hash-chained JSONL audit trail, so what was sent, masked
+            or blocked is provable after the fact.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Python</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">LiteLLM</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">HMAC audit</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Docker</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="vision llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Road Defect Detection API</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Multimodal</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Potholes, rutting and cracks, detected in two stages. YOLO runs at a deliberately low confidence
+            threshold for recall; a vision-language model then interrogates each candidate crop for precision.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            The response separates verified damage from rejected false positives with reasons, so operators
+            can see <em>why</em> a shadow or tyre mark was dropped instead of trusting a single score.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">FastAPI</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">YOLO</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">qwen3-vl</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">vLLM / Ollama</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="industrial">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Ion-Exchange Plant Digital Twin</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Real-time 3D</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            A 2-bed 3-tower ultrapure water plant modelled in USD and driven live inside NVIDIA Omniverse.
+            Resin bed heights, colours, flow direction and alarm lamps re-bind every frame from process data
+            over one versioned WebSocket contract.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Built against a frozen wire specification with a mock process engine and a 940-plus test suite,
+            so the customer's real engine drops in without touching the visual layer.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Omniverse Kit</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">USD</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">WebSocket</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">pytest</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="data industrial">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Air-Gapped Vector Map Stack</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Offline-first</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            A full slippy-map stack for networks with no internet at all: OSM extracts clipped with osmium,
+            built into MBTiles by tilemaker, served by tileserver-gl, with glyphs, sprites and MapLibre
+            vendored locally.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            One bootstrap script prepares, starts and verifies the stack across 30 automated checks, plus a
+            React facility viewer for port infrastructure on top.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">MapLibre GL</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">tilemaker</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">React + Vite</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">nginx</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="data llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Ontology Memory</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Knowledge graph</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Agent memory stored as an ontology rather than a pile of vectors. Neo4j with the n10s semantic
+            plugin and APOC holds RDF triples, so recall can be reasoned over, constrained and explained —
+            and vector search becomes one retrieval path among several.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            The ingestion layer is public as
+            <a class="text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent" href="https://github.com/sort-tech/neo4j-n10s-pipeline" target="_blank" rel="noopener noreferrer">neo4j-n10s-pipeline</a>.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Neo4j 5</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">n10s / RDF</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Cypher</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">pgvector</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Page Chatbot Extension</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Browser</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            A Chrome and Edge side-panel assistant grounded in the page you're reading. For long documents
+            it selects only the passages relevant to the question, then streams an answer with evidence
+            chips that highlight and scroll to the exact sentence.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Its embeddable sibling is public as
+            <a class="text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent" href="https://github.com/sort-tech/llm-chat-widget" target="_blank" rel="noopener noreferrer">llm-chat-widget</a>.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">MV3</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">JavaScript</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">SSE streaming</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">LiteLLM</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="vision llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Local LoRA Fine-Tuning Kit</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Model tuning</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Two parallel five-stage pipelines — a multimodal one turning receipt images into structured JSON,
+            and a text one routing customer enquiries — sharing the same path from synthetic data through
+            training, eval, adapter merge, GGUF conversion and Ollama re-registration.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            The teaching version is public as
+            <a class="text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent" href="https://github.com/sort-tech/llm-finetuning-tutorial" target="_blank" rel="noopener noreferrer">llm-finetuning-tutorial</a>.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">LoRA / QLoRA</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">llama.cpp</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Ollama</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Qwen</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="data">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Demand Forecasting Engine</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Time series</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Panel-structured forecasting with external covariates, honest baselines and rolling-origin
+            backtests — including foundation time-series models next to classical ones, because a model
+            only earns its place by beating a naive forecast on held-out windows.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">pandas</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Chronos</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Backtesting</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Feature eng.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="industrial data">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">EDI Projection Program</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Process engineering</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            A membrane-deionization sizing tool for water treatment engineers, reproducing the standard
+            two-page feed/output projection sheet. The engine computes on real chemistry — ionic balance,
+            Kohlrausch conductivity, Faraday ion transport and weak-acid dissociation equilibria.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">FastAPI</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">NumPy</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">React 18</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Tailwind</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="vision industrial">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Coastal Snapshot Scoring</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Edge imaging</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Field-camera coastline imagery captured in a compact binary snapshot format, then scored by
+            model to rank usable frames — with a self-contained HTML recording viewer for reviewing
+            captures without installing anything.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Python</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Binary formats</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Scoring models</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="llm">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">MCP &amp; Agent Tooling</h3>
+            <span class="shrink-0 rounded-md bg-accent2/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent2">Agents</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Model Context Protocol servers and agent workspaces that give models real, bounded tools —
+            plus visual flow orchestration with Flowise and RAG stacks wired to pgvector, so non-engineers
+            can trace what an agent actually did.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">MCP</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Flowise</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">OpenHands</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Claude Code</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="reveal project-card rounded-2xl p-px card-hairline" data-tags="llm vision">
+        <div class="flex h-full flex-col rounded-2xl bg-ink-900 p-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-semibold text-white">Document Automation</h3>
+            <span class="shrink-0 rounded-md bg-accent/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-accent">Structured output</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Vision LLMs that emit schema-validated JSON instead of prose, then a deterministic builder that
+            turns it into real artefacts — native PowerPoint shapes, structured receipts, routed tickets.
+            The model proposes; the schema decides.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-400">
+            Open-sourced as
+            <a class="text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent" href="https://github.com/sort-tech/image-to-ppt" target="_blank" rel="noopener noreferrer">image-to-ppt</a>.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5 pt-1">
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Pydantic</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">python-pptx</li>
+            <li class="rounded-md bg-white/5 px-2 py-1 font-mono text-[11px] text-slate-400">Vision LLM</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <p id="filter-empty" class="mt-8 hidden text-sm text-slate-500">No projects in this category yet.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ STACK ════════════════════════════ -->
+<section id="stack" class="border-b border-white/5 py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Stack</p>
+    <h2 class="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      Tools we reach for, and why
+    </h2>
+
+    <div class="mt-12 grid gap-px overflow-hidden rounded-2xl bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">LLM &amp; AI</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Gateways, local inference, tuning and evaluation.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">LiteLLM</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Ollama</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">vLLM</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Claude</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">GPT</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Gemini</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Qwen / qwen3-vl</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">LoRA / QLoRA</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Unsloth</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">MCP</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">Retrieval &amp; data</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Storage that can answer, and explain the answer.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">PostgreSQL</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">pgvector</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Neo4j</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">n10s / RDF</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">RAGFlow</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Flowise</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">pandas</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Oracle</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">Vision &amp; ML</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Detection, verification and forecasting.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">PyTorch</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">YOLO</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">OpenCV</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Chronos</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">scikit-learn</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Hugging Face</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">Backend</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Typed contracts, tests, streaming.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Python</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">FastAPI</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Pydantic</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">pytest</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Node.js</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">WebSocket / SSE</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Go</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Java</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">Frontend &amp; 3D</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Interfaces operators actually use.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">TypeScript</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">React 18</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Vite</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Tailwind CSS</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">MapLibre GL</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Omniverse / USD</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Extensions (MV3)</li>
+        </ul>
+      </div>
+
+      <div class="bg-ink-900 p-6">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-accent">Platform</h3>
+        <p class="mt-3 text-sm leading-relaxed text-slate-500">Reproducible from a clean machine.</p>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Docker Compose</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Linux</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">nginx</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">GitHub Actions</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Bash</li>
+          <li class="rounded-md bg-white/5 px-2 py-1 text-xs text-slate-300">Air-gapped deploys</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ PROCESS ════════════════════════════ -->
+<section id="process" class="border-b border-white/5 py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-16">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">How we work</p>
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          Contract first, then code
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-slate-400">
+          Most AI projects don't fail at the model. They fail because nobody wrote down what the interface
+          promises, what happens when the model is wrong, or how anyone proves afterwards what it did.
+          So we start there.
+        </p>
+        <a href="#contact" class="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-white">
+          Talk through a project
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.7 4.3a1 1 0 0 0-1.4 1.4L12.6 9H4a1 1 0 1 0 0 2h8.6l-3.3 3.3a1 1 0 1 0 1.4 1.4l5-5a1 1 0 0 0 0-1.4l-5-5Z"/></svg>
+        </a>
+      </div>
+
+      <ol class="relative space-y-8 border-l border-white/10 pl-8">
+        <li class="reveal relative">
+          <span class="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full bg-ink-850 font-mono text-[11px] font-bold text-accent ring-1 ring-inset ring-accent/30">1</span>
+          <h3 class="text-base font-semibold text-white">Freeze the contract</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">
+            Wire schema, versioning, error codes and the boundary vocabulary get written and frozen before
+            implementation. Both sides can then build in parallel against a mock.
+          </p>
+        </li>
+        <li class="reveal relative">
+          <span class="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full bg-ink-850 font-mono text-[11px] font-bold text-accent ring-1 ring-inset ring-accent/30">2</span>
+          <h3 class="text-base font-semibold text-white">Design for being wrong</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">
+            Models mispredict. Pipelines get a verification stage, a rejected-with-reason channel and a
+            human review path, so a wrong answer degrades instead of propagating silently.
+          </p>
+        </li>
+        <li class="reveal relative">
+          <span class="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full bg-ink-850 font-mono text-[11px] font-bold text-accent ring-1 ring-inset ring-accent/30">3</span>
+          <h3 class="text-base font-semibold text-white">Keep it auditable</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">
+            Hash-chained event logs, policy versions and masking records. When a regulator, an auditor or a
+            customer asks what the system did in March, the answer is a query, not an archaeology project.
+          </p>
+        </li>
+        <li class="reveal relative">
+          <span class="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full bg-ink-850 font-mono text-[11px] font-bold text-accent ring-1 ring-inset ring-accent/30">4</span>
+          <h3 class="text-base font-semibold text-white">Run it where the data lives</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">
+            Local models, vendored assets, Docker Compose, no runtime calls out. Plenty of our work is for
+            environments where sending data to a hosted API is simply not an option.
+          </p>
+        </li>
+        <li class="reveal relative">
+          <span class="absolute -left-[41px] flex h-6 w-6 items-center justify-center rounded-full bg-ink-850 font-mono text-[11px] font-bold text-accent ring-1 ring-inset ring-accent/30">5</span>
+          <h3 class="text-base font-semibold text-white">Document the limits honestly</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-400">
+            Every repo states what was verified and what wasn't. A known-limitations section is worth more
+            on handover than an optimistic README — and it's why our code is public.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ ABOUT ════════════════════════════ -->
+<section id="about" class="border-b border-white/5 py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">About</p>
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">sortInc.</h2>
+        <p class="mt-5 text-base leading-relaxed text-slate-400">
+          sortInc. is an independent AI engineering practice based in Seoul, led by
+          <span class="font-semibold text-slate-200">Jwp</span> — an AI &amp; backend engineer working on
+          knowledge graphs, RAG pipelines and AI agents.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-slate-400">
+          It exists because the interesting problems in applied AI sit exactly where most teams split
+          responsibilities: between the model, the service around it, the operator's screen, and the
+          compliance story.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-slate-400">
+          We work across all four. A project can go from tuning a local vision model, to the FastAPI
+          service that verifies its output, to the React dashboard an operator watches, to the audit trail
+          the legal team needs — without three handovers and two integration projects.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-slate-400">
+          Domains so far: port and maritime operations, water treatment and process plants, road
+          infrastructure inspection, coastal monitoring, document automation and internal AI platforms.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="https://github.com/sort-tech" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 rounded-lg bg-white/5 px-3.5 py-2 text-sm font-medium text-slate-200 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/10">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.4-3.88-1.4-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+            github.com/sort-tech
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl bg-ink-900 p-6 ring-1 ring-inset ring-white/5">
+          <h3 class="text-sm font-semibold text-white">Engagements</h3>
+          <ul class="mt-3 space-y-2.5 text-sm text-slate-400">
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Build an AI feature end to end</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Stand up an internal LLM gateway</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Knowledge graph &amp; RAG design</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Architecture review &amp; prototyping</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent"></span>Air-gapped / on-prem deployment</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-ink-900 p-6 ring-1 ring-inset ring-white/5">
+          <h3 class="text-sm font-semibold text-white">Working languages</h3>
+          <ul class="mt-3 space-y-2.5 text-sm text-slate-400">
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent2"></span>Korean — native</li>
+            <li class="flex gap-2.5"><span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent2"></span>English — technical, written</li>
+          </ul>
+          <h3 class="mt-6 text-sm font-semibold text-white">Based in</h3>
+          <p class="mt-2 text-sm text-slate-400">Seoul, South Korea · remote-friendly</p>
+          <h3 class="mt-6 text-sm font-semibold text-white">Code policy</h3>
+          <p class="mt-2 text-sm text-slate-400">Open source by default. You keep the repo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ CONTACT ════════════════════════════ -->
+<section id="contact" class="relative overflow-hidden py-20 sm:py-28">
+  <div class="absolute inset-0 grid-bg opacity-60" aria-hidden="true"></div>
+  <div class="absolute inset-0 glow opacity-70" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
+    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      Have something that needs to actually work?
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-slate-400">
+      Send a short description of the problem and the constraints you're stuck with — on-prem only,
+      no labelled data, a regulator asking questions. Those are usually the interesting part.
+    </p>
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <a href="mailto:jiwon83park@gmail.com" class="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-ink-950 transition-transform hover:-translate-y-0.5">
+        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2.5 5.5A2 2 0 0 1 4.5 3.5h11a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-9Zm2.2-.2 5.3 4.1 5.3-4.1H4.7Z"/></svg>
+        Email us
+      </a>
+      <a href="https://github.com/sort-tech" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-200 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/5">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.4-3.88-1.4-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .3.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+        Browse the code
+      </a>
+    </div>
+    <p class="mt-6 font-mono text-xs text-slate-600">github.com/sort-tech · Seoul, Korea</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer class="border-t border-white/5 bg-ink-950">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <div class="flex items-center gap-2.5">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/25 to-accent2/25 ring-1 ring-inset ring-white/10">
+        <svg class="h-4 w-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 16c2.4 1.7 5.6 1.8 7.2.2 1.8-1.8-.4-3.8-3-4.8-2.6-1-4.4-2.7-2.9-4.8C6.8 5 9.9 5 12.3 6.2"/>
+          <circle cx="18.2" cy="15.6" r="2.6" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-white">sortInc.</p>
+        <p class="text-xs text-slate-500">LLM &amp; applied AI engineering · Seoul</p>
+      </div>
+    </div>
+    <nav class="flex flex-wrap gap-x-6 gap-y-2">
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="#capabilities">Capabilities</a>
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="#opensource">Open source</a>
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="#work">Work</a>
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="#stack">Stack</a>
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="#contact">Contact</a>
+      <a class="text-sm text-slate-500 transition-colors hover:text-slate-200" href="https://github.com/sort-tech" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </div>
+  <div class="mx-auto max-w-6xl border-t border-white/5 px-4 py-6 sm:px-6">
+    <p class="font-mono text-xs text-slate-600">© 2026 sortInc. All rights reserved. · Built as a single HTML file.</p>
+  </div>
+</footer>
+
+<script>
+  // ── Scroll reveal ──────────────────────────────────────────────
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+  // ── Project filter ────────────────────────────────────────────
+  (function () {
+    var buttons = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.project-card');
+    var empty = document.getElementById('filter-empty');
+
+    var ON = ['bg-accent', 'text-ink-950', 'font-semibold'];
+    var OFF = ['bg-white/5', 'text-slate-400', 'font-medium', 'ring-1', 'ring-inset', 'ring-white/10', 'hover:text-white'];
+
+    function setActive(active) {
+      buttons.forEach(function (btn) {
+        var isActive = btn === active;
+        btn.classList.remove.apply(btn.classList, isActive ? OFF : ON);
+        btn.classList.add.apply(btn.classList, isActive ? ON : OFF);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.dataset.filter;
+        var shown = 0;
+        cards.forEach(function (card) {
+          var match = filter === 'all' || (card.dataset.tags || '').split(' ').indexOf(filter) !== -1;
+          card.hidden = !match;
+          if (match) { shown++; }
+        });
+        if (empty) { empty.classList.toggle('hidden', shown > 0); }
+        setActive(btn);
+      });
+    });
+
+    setActive(document.querySelector('.filter-btn[data-filter="all"]'));
+  })();
+</script>
+
+</body>
+</html>
